@@ -41,7 +41,7 @@ Installation_dependency(){
 		chmod +x ioping.static
 	else
 		apt-get update && apt-get upgrade -y
-		apt-get install curl mtr time virt-what -y
+		apt-get install curl mtr time virt-what python -y
 		[[ ${action} == "a" ]] && apt-get install make gcc gdb automake autoconf -y
 		curl -s --max-time 10 -o ioping.static http://wget.racing/ioping.static
 		chmod +x ioping.static
