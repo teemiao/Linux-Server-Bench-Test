@@ -95,8 +95,8 @@ system_info(){
 	echo "Arch                 : $arch ($lbit Bit)" | tee -a $logfile
 	echo "Kernel               : $kern" | tee -a $logfile
 	echo "ip                   : $IP" | tee -a $logfilename
-	echo "ipaddr               : $IPaddr" | tee -a $logfilename
-	echo "vm                   : $vm" | tee -a $logfilename
+	echo "ipaddr               : $IPaddr" | tee -a $logfile
+	echo "vm                   : $vm" | tee -a $logfile
 	next | tee -a $logfile
 }
 ioping() {
