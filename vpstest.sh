@@ -4,7 +4,7 @@ export PATH
 # Description: Auto test download & I/O speed script
 # Thanks: LookBack <admin@dwhd.org>; Nils Steinger; Teddysun
 # Toyo: https://doub.io
-# H2YTech: https://minecloud.asia
+# H2YTech: https://www.minecloud.asia
 # For https://VPS.BEST
 
 RED='\033[0;31m' && GREEN='\033[0;32m' && YELLOW='\033[0;33m' && PLAIN='\033[0m'
@@ -36,13 +36,13 @@ Installation_dependency(){
 	if [[ ${release} == "centos" ]]; then
 		yum update -y
 		yum install mtr curl time virt-what -y
-		[[ ${action} == "a" ]] && yum install make gcc gcc-c++ gdbautomake autoconf -y
+		[[ ${action} == "a" ]] && yum install epel-release make gcc gcc-c++ gdbautomake autoconf hdparm -y
 		curl -s --max-time 10 -o ioping.static http://wget.racing/ioping.static
 		chmod +x ioping.static
 	else
 		apt-get update && apt-get upgrade -y
 		apt-get install curl mtr time virt-what python -y
-		[[ ${action} == "a" ]] && apt-get install make gcc gdb automake autoconf -y
+		[[ ${action} == "a" ]] && apt-get install make gcc gdb automake autoconf hdparm -y
 		curl -s --max-time 10 -o ioping.static http://wget.racing/ioping.static
 		chmod +x ioping.static
 	fi
@@ -263,11 +263,11 @@ benchtest(){
 	tar -xzf UnixBench5.1.3.tgz
 	cd UnixBench/
 	make
-	echo "===== 开始测试CPU性能測試 =====" | tee -a ../${logfilename}
+	echo "===== 开始UnixBench测试 =====" | tee -a ../${logfilename}
 	./Run
 	benchfile=$(ls results/ | grep -v '\.')
 	cat results/${benchfile} >> ../${logfilename}
-	echo "===== CPU性能测试结束 =====" | tee -a ../${logfilename}	
+	echo "===== UnixBench测试结束 =====" | tee -a ../${logfilename}	
 	cd ..
 	rm -rf UnixBench5.1.3.tgz UnixBench
 	next | tee -a $logfile
@@ -285,7 +285,7 @@ go(){
 	tracetest
 	backtracetest
 	[[ ${action} == "a" ]] && benchtest
-	echo "測試脚本执行完毕！日志文件: ${logfile}"
+	echo "测试脚本执行完毕！日志文件: ${logfile}"
 }
 action=$1
 go
