@@ -169,10 +169,10 @@ speed_test() {
 }
 speed() {
 	printf "%-32s%-24s%-14s\n" "Node Name:" "IPv4 address:" "Download Speed"
-	speed_test 'https://download3.vmware.com/software/wkst/file/VMware-workstation-full-12.5.7-5813279.exe' 'Akamai'
+	speed_test 'https://origin-a.akamaihd.net/Origin-Client-Download/origin/mac/live/Origin.dmg' 'Akamai'
         speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
 	speed_test 'https://downloadsapachefriends.global.ssl.fastly.net/xampp-files/7.1.8/xampp-win32-7.1.8-0-VC14-installer.exe' 'Fastly'
-	speed_test 'http://soft.duote.com.cn/txyouxihe_2.17.0_1.exe' 'CNC CDN'
+	speed_test 'http://soft.duote.com.cn/formatfactory_4.1.0.0.exe' 'CNC CDN'
 	speed_test 'http://cn.chinacache.com/euro-ix-video-no-voice-high-res_720P.mp4' 'ChinaCache CDN'
 	speed_test 'http://cdn.zstack.io/product_downloads/vrouter/zstack-vrouter-2.1.0.qcow2' 'AliYun CDN'
 	speed_test 'http://pkg.biligame.com/fatego/fatego_v1.16.0_bili_375772.apk' 'QCloud CDN'
@@ -196,7 +196,7 @@ speed() {
 	speed_test 'http://mirror.hk.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, HongKong, CN'
 	speed_test 'http://mirror.sg.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, Singapore, SG'
 	speed_test 'http://chi.testfiles.ubiquityservers.com/100mb.txt' 'Leaseweb, Chicago, US'
-#	speed_test 'http://phx.testfiles.ubiquityservers.com/100mb.txt' 'Leaseweb, Phoenix, US'
+        #speed_test 'http://phx.testfiles.ubiquityservers.com/100mb.txt' 'Leaseweb, Phoenix, US'
 	speed_test 'http://mirror.wdc1.us.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, Washington D.C., US'
 	speed_test 'http://chi.testfiles.ubiquityservers.com/100mb.txt' 'Leaseweb, Chicago, US'
 	speed_test 'http://mirror.sfo12.us.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, San Francisco, US'
@@ -204,12 +204,12 @@ speed() {
 	speed_test 'http://proof.ovh.ca/files/100Mio.dat' 'OVH, Montreal, CA'
 	speed_test 'http://183.60.137.161/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaTelecom, Dongguan, CN'
 	speed_test 'http://14.29.72.152/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaTelecom, Foshan, CN'
-	speed_test 'http://222.73.131.40/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaTelecom, Shanghai, CN'
-	speed_test 'http://163.177.153.71/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaUnicom, Foshan, CN'
-	speed_test 'http://112.90.51.172/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaUnicom, Zhongshan, CN'
+	#speed_test 'http://222.73.131.40/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaTelecom, Shanghai, CN'
+	#speed_test 'http://163.177.153.71/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaUnicom, Foshan, CN'
+	#speed_test 'http://112.90.51.172/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaUnicom, Zhongshan, CN'
 	speed_test 'http://111.202.98.38/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaUnicom, Beijing, CN'
 	speed_test 'http://223.82.245.41/dl.softmgr.qq.com/original/game/DuiZhanSetup1_8_4_2042_win10.exe' 'ChinaMobile, Jiangxi, CN'
-	speed_test 'http://61.233.79.5/setup.exe' 'ChinaTieTong, Henan, CN'
+	#speed_test 'http://61.233.79.5/setup.exe' 'ChinaTieTong, Henan, CN'
 	speed_test 'http://tpdb.speed2.hinet.net/test_100m.zip' 'Hinet, Taiwan, TW'
 	next
 }
