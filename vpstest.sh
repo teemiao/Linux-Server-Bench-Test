@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-# Description: Auto test download & I/O speed script
+# Description: script for Auto test VPS's bandwith, I/O speed, route to mainland China & CPU performance
 # Thanks: LookBack <admin@dwhd.org>; Nils Steinger; Teddysun
 # Toyo: https://doub.io
 # H2YTech: https://www.minecloud.asia
