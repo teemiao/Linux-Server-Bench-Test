@@ -161,14 +161,31 @@ io_test(){
 	next | tee -a $logfile
 }
 speed_test() {
-	local speedtest=$(wget -4O /dev/null -T300 $1 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}')
+	local speedtest=$( curl  -m 12  -O "/dev/null" -s "$1" )
 	local ipaddress=$(ping -c1 -n `awk -F'/' '{print $3}' <<< $1` | awk -F'[()]' '{print $2;exit}')
 	local nodeName=$2
-	printf "${YELLOW}%-32s${GREEN}%-24s${RED}%-14s${PLAIN}\n" "${nodeName}:" "${ipaddress}:" "${speedtest}"
+	printf "${YELLOW}%-32s${GREEN}%-24s${RED}%-14s${PLAIN}\n" "${nodeName}:" "${ipaddress}:" "$(FormatBytes $speedtest)"
+}
+FormatBytes() {
+	bytes=${1%.*}
+	local Mbps=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 / 1024 * 8 } END { if (NR == 0) { print "error" } }' )
+	if [[ $bytes -lt 1000 ]]; then
+		printf "%8i B/s |      N/A     "  $bytes
+	elif [[ $bytes -lt 1000000 ]]; then
+		local KiBs=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 } END { if (NR == 0) { print "error" } }' )
+		printf "%7s KiB/s | %7s Mbps" "$KiBs" "$Mbps"
+	else
+		# awk way for accuracy
+		local MiBs=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 / 1024 } END { if (NR == 0) { print "error" } }' )
+		printf "%7s MiB/s | %7s Mbps" "$MiBs" "$Mbps"
+
+		# bash way
+		# printf "%4s MiB/s | %4s Mbps""$(( bytes / 1024 / 1024 ))" "$(( bytes / 1024 / 1024 * 8 ))"
+	fi
 }
 speed() {
 	printf "%-32s%-24s%-14s\n" "Node Name:" "IPv4 address:" "Download Speed"
-        speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
+    speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
 	speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, Tokyo, JP'
 	speed_test 'http://speedtest.tokyo2.linode.com/100MB-tokyo2.bin' 'Linode, Tokyo2, JP'
 	speed_test 'http://speedtest.singapore.linode.com/100MB-singapore.bin' 'Linode, Singapore, SG'
