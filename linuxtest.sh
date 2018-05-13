@@ -186,8 +186,6 @@ speed() {
 	speed_test 'http://speedtest.par01.softlayer.com/downloads/test100.zip' 'Softlayer, Paris, FR'
 	speed_test 'http://mirror.hk.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, HongKong, CN'
 	speed_test 'http://mirror.sg.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, Singapore, SG'
-	speed_test 'http://chi.testfiles.ubiquityservers.com/100mb.txt' 'Leaseweb, Chicago, US'
-        #speed_test 'http://phx.testfiles.ubiquityservers.com/100mb.txt' 'Leaseweb, Phoenix, US'
 	speed_test 'http://mirror.wdc1.us.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, Washington D.C., US'
 	speed_test 'http://chi.testfiles.ubiquityservers.com/100mb.txt' 'Leaseweb, Chicago, US'
 	speed_test 'http://mirror.sfo12.us.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, San Francisco, US'
