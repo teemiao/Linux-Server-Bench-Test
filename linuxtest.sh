@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-# Description: script for Auto test VPS's bandwith, I/O speed, route to mainland China & CPU performance
 # Thanks: LookBack <admin@dwhd.org>; Nils Steinger; Teddysun;Toyo;
-# For https://www.94ish.me
+# For https://www.94ish.me by Chikage
 
 
-RED='\033[0;31m' && GREEN='\033[0;32m' && YELLOW='\033[0;33m' && PLAIN='\033[0m'
+
 next() { printf "%-70s\n" "-" | sed 's/\s/-/g'; }
 get_opsy() {
 	[[ -f /etc/redhat-release ]] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
@@ -34,17 +33,19 @@ check_sys(){
 Installation_dependency(){
 	if [[ ${release} == "centos" ]]; then
 		yum update -y
-		yum install mtr curl time virt-what -y
+		yum install curl time virt-what -y
 		[[ ${action} == "a" ]] && yum install epel-release make gcc gcc-c++ gdbautomake autoconf hdparm -y
 		curl -s --max-time 10 -o ioping.static http://wget.racing/ioping.static
 		chmod +x ioping.static
 	else
 		apt-get update && apt-get upgrade -y
-		apt-get install curl mtr time virt-what python -y
+		apt-get install curl time virt-what python -y
 		[[ ${action} == "a" ]] && apt-get install make gcc gdb automake autoconf hdparm -y
 		curl -s --max-time 10 -o ioping.static http://wget.racing/ioping.static
 		chmod +x ioping.static
 	fi
+	wget --no-check-certificate https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/besttrace
+	chmod -R +x besttrace
 }
 get_info(){
 	logfile="test.log"
@@ -99,10 +100,12 @@ system_info(){
 	next | tee -a $logfile
 }
 ioping() {
+		echo "===== 开始硬盘延迟测试 =====" | tee -a $logfile
         printf 'ioping: seek rate\n    ' | tee -a $logfile
         ./ioping.static -R -w 5 . | tail -n 1 | tee -a $logfile
         printf 'ioping: sequential speed\n    ' | tee -a $logfile
         ./ioping.static -RL -w 5 . | tail -n 2 | head -n 1 | tee -a $logfile
+		echo "===== 硬盘延迟测试完成 =====" | tee -a $logfile
 	next | tee -a $logfile
 }
 calc_disk() {
@@ -158,13 +161,13 @@ io_test(){
 	ioall=$( awk 'BEGIN{print '$ioraw1' + '$ioraw2' + '$ioraw3'}' )
 	ioavg=$( awk 'BEGIN{printf "%.1f", '$ioall' / 3}' )
 	echo "Average I/O speed    : $ioavg ${unit}" | tee -a $logfile
-	next | tee -a $logfile
 }
 speed_test() {
-	local speedtest=$( curl -Lo /dev/null -skw "%{speed_download}\n" "$1" )
-	local ipaddress=$(ping -c1 -n `awk -F'/' '{print $3}' <<< $1` | awk -F'[()]' '{print $2;exit}')
+	local speedtest=$( curl  -m 12 -Lo /dev/null -skw "%{speed_download}\n" "$1" )
+	local host=$(awk -F':' '{print $1}' <<< `awk -F'/' '{print $3}' <<< $1`)
+	local ipaddress=$(ping -c1 -n ${host} | awk -F'[()]' '{print $2;exit}')
 	local nodeName=$2
-	printf "${YELLOW}%-32s${GREEN}%-24s${RED}%-14s${PLAIN}\n" "${nodeName}:" "${ipaddress}:" "$(FormatBytes $speedtest)"
+	printf "%-32s%-24s%-14s\n" "${nodeName}:" "${ipaddress}:" "$(FormatBytes $speedtest)"
 }
 FormatBytes() {
 	bytes=${1%.*}
@@ -185,8 +188,8 @@ FormatBytes() {
 }
 speed() {
 	printf "%-32s%-31s%-14s\n" "Node Name:" "IPv4 address:" "Download Speed"
-    speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
-	speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, Tokyo, JP'
+	speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
+    speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, Tokyo, JP'
 	speed_test 'http://speedtest.tokyo2.linode.com/100MB-tokyo2.bin' 'Linode, Tokyo2, JP'
 	speed_test 'http://speedtest.singapore.linode.com/100MB-singapore.bin' 'Linode, Singapore, SG'
 	speed_test 'http://speedtest.fremont.linode.com/100MB-fremont.bin' 'Linode, Fremont, CA'
@@ -204,25 +207,17 @@ speed() {
 	speed_test 'http://mirror.hk.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, HongKong, CN'
 	speed_test 'http://mirror.sg.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, Singapore, SG'
 	speed_test 'http://mirror.wdc1.us.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, Washington D.C., US'
-	speed_test 'http://chi.testfiles.ubiquityservers.com/100mb.txt' 'Leaseweb, Chicago, US'
 	speed_test 'http://mirror.sfo12.us.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, San Francisco, US'
 	speed_test 'http://mirror.nl.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, Netherlands, NL'
 	speed_test 'http://proof.ovh.ca/files/100Mio.dat' 'OVH, Montreal, CA'
-	
 	speed_test 'http://speedtest1.online.sh.cn:8080/download?size=100000000' 'ChinaTelecom, Shanghai, CN'
-	speed_test 'http://speedtest1.online.sh.cn:8080/download?size=100000000' 'ChinaUnicom, Shanghai, CN'
-	speed_test 'http://speedtest2.sh.chinamobile.com:8080/download?size=100000000' 'ChinaMobile, Shanghai, CN'
-	
 	speed_test 'http://st1.bjtelecom.net:8080/download?size=100000000' 'ChinaTelecom, Beijing, CN'
 	speed_test 'http://www2.unicomtest.com:8080/download?size=100000000' 'ChinaUnicom, Beijing, CN'
-	
 	speed_test 'http://gzspeedtest.com:8080/download?size=100000000' 'ChinaTelecom, Guangzhou, CN'
 	speed_test 'http://speedtest1.gd.chinamobile.com:8080/download?size=100000000' 'ChinaMobile, Guangzhou, CN'
-	
 	speed_test 'http://speedtest1.ah163.com:8080/download?size=100000000' 'ChinaTelecom, Hefei, CN'
 	speed_test 'http://112.122.10.26:8080/download?size=100000000' 'ChinaUnicom, Hefei, CN'
 	speed_test 'http://4gtest.ahydnet.com:8080/download?size=100000000' 'ChinaMobile, Hefei, CN'
-	
 	speed_test 'http://tpdb.speed2.hinet.net/test_100m.zip' 'Hinet, Taiwan, TW'
 	next
 }
@@ -234,49 +229,49 @@ speed_test_cli(){
 	rm -rf speedtest.py
 	next | tee -a $logfile
 }
-mtrgo(){
-	mtrurl=$1
-	nodename=$2
-	echo "===== 测试 [$nodename] 到此服务器的去程路由 =====" | tee -a $logfile
-	mtrgostr=$(curl -s "$mtrurl")
-	echo -e "$mtrgostr" > mtrlog.log
-	mtrgostrback=$(curl -s -d @mtrlog.log "https://test.91yun.org/traceroute.php")
-	rm -rf mtrlog.log
-	echo -e $mtrgostrback | awk -F '^' '{printf("%-2s\t%-16s\t%-35s\t%-30s\t%-25s\n",$1,$2,$3,$4,$5)}' | tee -a $logfile
-	echo -e "===== [$nodename] 去程路由测试结束 =====" | tee -a $logfile	
-}
+
 mtrback(){
 	echo "===== 测试 [$2] 的回程路由 =====" | tee -a $logfile
-	mtr -r -c 10 $1 | tee -a $logfile
+	./besttrace -q 1 $1 | tee -a $logfile
 	echo -e "===== 回程 [$2] 路由测试结束 =====" | tee -a $logfile	
 }
-tracetest(){
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=254&ip=$IP" "北京电信"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=275&ip=$IP" "上海电信"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=163&ip=$IP" "金华电信"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=274&ip=$IP" "广州电信"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=20&ip=$IP" "厦门电信CN2"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=7&ip=$IP" "天津联通"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=12&ip=$IP" "重庆联通"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=298&ip=$IP" "金华联通"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=339&ip=$IP" "福州联通"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=2&ip=$IP" "天津移动"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=315&ip=$IP" "镇江移动"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=160&ip=$IP" "北京教育网"
-	mtrgo "http://www.ipip.net/traceroute.php?as=1&a=get&n=1&id=41&ip=$IP" "北京鹏博士"
-	next | tee -a $logfile
-}
+
 backtracetest(){
-	mtrback "183.60.137.161" "东莞电信"
-	mtrback "14.29.72.152" "佛山电信"
-	mtrback "222.73.131.40" "上海电信"
-	mtrback "163.177.153.71" "佛山联通"
-	mtrback "112.90.51.172" "舟山联通"
-	mtrback "111.202.98.38" "北京联通"
-	mtrback "223.82.245.41" "江西移动"
-	mtrback "101.4.60.106" "北京科技网"
+	mtrback "125.64.38.178" "四川电信"
+	mtrback "106.120.243.142" "北京电信"
+	mtrback "103.254.70.52" "北京联通"
+	mtrback "218.205.152.14" "北京移动"
+	mtrback "117.131.14.202" "上海移动"
+	mtrback "211.144.205.58" "上海电信"
+	mtrback "220.196.42.133" "上海联通"
+	mtrback "27.40.0.30" "广东联通"
+	mtrback "211.139.129.222" "广东移动"
+	rm -rf besttrace
 	next | tee -a $logfile
 }
+shping(){
+	ping $1 -c 10 > /tmp/$1.txt
+	echo 【$2】 - $1
+	tail -2 /tmp/$1.txt
+	next | tee -a $logfile
+}
+mping(){
+	shping "125.64.38.178" "四川电信"
+	shping "106.120.243.142" "北京电信"
+	shping "103.254.70.52" "北京联通"
+	shping "218.205.152.14" "北京移动"
+	shping "117.131.14.202" "上海移动"
+	shping "211.144.205.58" "上海电信"
+	shping "220.196.42.133" "上海联通"
+	shping "27.40.0.30" "广东联通"
+	shping "211.139.129.222" "广东移动"
+	echo "min:最低延迟"
+	echo "avg:平均延迟"
+	echo "max:最高延迟"
+	echo "mdev:平均偏差"
+	next | tee -a $logfile
+}
+
 benchtest(){
 	if ! wget -qc http://lamp.teddysun.com/files/UnixBench5.1.3.tgz; then
 		echo "UnixBench 5.1.3.tgz 下载失败" && exit 1
@@ -299,14 +294,23 @@ go(){
 	get_info
 	system_info
 	ioping
+	echo "===== 开始少量数据频繁写入测试 =====" | tee -a $logfile
 	io_test "io_test_1"
+	echo "===== 少量数据频繁写入测试完成 =====" | tee -a $logfile
+	next | tee -a $logfile
+	echo "===== 开始大数据连续写入测试 =====" | tee -a $logfile
 	io_test "io_test_2"
+	echo "===== 大数据连续写入测试完成 =====" | tee -a $logfile
+	next | tee -a $logfile
 	speed_test_cli
 	speed | tee -a $logfile
-	tracetest
 	backtracetest
+	mping | tee -a $logfile
+	
 	[[ ${action} == "a" ]] && benchtest
 	echo "测试脚本执行完毕！日志文件: ${logfile}"
+	echo "就是爱生活：www.94ish.me by Chikage"
 }
 action=$1
+cd /root
 go
