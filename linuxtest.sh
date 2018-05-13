@@ -161,7 +161,7 @@ io_test(){
 	next | tee -a $logfile
 }
 speed_test() {
-	local speedtest=$( curl  -m 12  -O "/dev/null" -s "$1" )
+	local speedtest=$( curl -Lo /dev/null -skw "%{speed_download}\n" "$1" )
 	local ipaddress=$(ping -c1 -n `awk -F'/' '{print $3}' <<< $1` | awk -F'[()]' '{print $2;exit}')
 	local nodeName=$2
 	printf "${YELLOW}%-32s${GREEN}%-24s${RED}%-14s${PLAIN}\n" "${nodeName}:" "${ipaddress}:" "$(FormatBytes $speedtest)"
@@ -184,7 +184,7 @@ FormatBytes() {
 	fi
 }
 speed() {
-	printf "%-32s%-24s%-14s\n" "Node Name:" "IPv4 address:" "Download Speed"
+	printf "%-32s%-31s%-14s\n" "Node Name:" "IPv4 address:" "Download Speed"
     speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
 	speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, Tokyo, JP'
 	speed_test 'http://speedtest.tokyo2.linode.com/100MB-tokyo2.bin' 'Linode, Tokyo2, JP'
