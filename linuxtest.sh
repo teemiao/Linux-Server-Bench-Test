@@ -44,7 +44,7 @@ Installation_dependency(){
 		curl -s --max-time 10 -o ioping.static http://wget.racing/ioping.static
 		chmod +x ioping.static
 	fi
-	wget --no-check-certificate https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/besttrace
+	wget --no-check-certificate -N "https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/besttrace"
 	chmod -R +x besttrace
 }
 get_info(){
@@ -107,6 +107,7 @@ ioping() {
         ./ioping.static -RL -w 5 . | tail -n 2 | head -n 1 | tee -a $logfile
 		echo "===== 硬盘延迟测试完成 =====" | tee -a $logfile
 	next | tee -a $logfile
+	rm -rf ioping.static
 }
 calc_disk() {
 	local total_size=0
@@ -310,6 +311,7 @@ go(){
 	[[ ${action} == "a" ]] && benchtest
 	echo "测试脚本执行完毕！日志文件: ${logfile}"
 	echo "就是爱生活：www.94ish.me by Chikage"
+	rm -rf linuxtest.sh
 }
 action=$1
 cd /root
