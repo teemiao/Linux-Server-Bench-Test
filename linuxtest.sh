@@ -2,10 +2,9 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 # Description: script for Auto test VPS's bandwith, I/O speed, route to mainland China & CPU performance
-# Thanks: LookBack <admin@dwhd.org>; Nils Steinger; Teddysun
-# Toyo: https://doub.io
-# H2YTech: https://www.minecloud.asia
-# For https://VPS.BEST
+# Thanks: LookBack <admin@dwhd.org>; Nils Steinger; Teddysun;Toyo;
+# For https://www.94ish.me
+
 
 RED='\033[0;31m' && GREEN='\033[0;32m' && YELLOW='\033[0;33m' && PLAIN='\033[0m'
 next() { printf "%-70s\n" "-" | sed 's/\s/-/g'; }
