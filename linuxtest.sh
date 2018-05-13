@@ -223,12 +223,12 @@ speed() {
 	next
 }
 speed_test_cli(){
-	echo "===== 开始speedtest =====" | tee -a $logfile
+	echo "===== 开始speedtest =====" 
 	wget -q --no-check-certificate https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py && 
-	python speedtest.py --share | tee -a $logfile
-	echo -e "===== speedtest完成 =====" | tee -a $logfile
+	python speedtest.py --share 
+	echo -e "===== speedtest完成 =====" 
 	rm -rf speedtest.py
-	next | tee -a $logfile
+	next 
 }
 
 mtrback(){
