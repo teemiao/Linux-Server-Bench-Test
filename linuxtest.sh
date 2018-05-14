@@ -100,12 +100,12 @@ system_info(){
 	next | tee -a $logfile
 }
 ioping() {
-		echo "===== 开始硬盘延迟测试 =====" | tee -a $logfile
+		echo "===== 开始硬盘性能测试 =====" | tee -a $logfile
         printf 'ioping: seek rate\n    ' | tee -a $logfile
         ./ioping.static -R -w 5 . | tail -n 1 | tee -a $logfile
         printf 'ioping: sequential speed\n    ' | tee -a $logfile
         ./ioping.static -RL -w 5 . | tail -n 2 | head -n 1 | tee -a $logfile
-		echo "===== 硬盘延迟测试完成 =====" | tee -a $logfile
+		echo "===== 硬盘性能测试完成 =====" | tee -a $logfile
 	next | tee -a $logfile
 	rm -rf ioping.static
 }
@@ -121,47 +121,6 @@ calc_disk() {
 		total_size=$( awk 'BEGIN{printf "%.1f", '$total_size' + '$size'}' )
 	done
 	echo ${total_size}
-}
-io_test_1() {
-	(LANG=C dd if=/dev/zero of=test_$$ bs=64k count=4k oflag=dsync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//'
-}
-io_test_2() {
-	(LANG=C dd if=/dev/zero of=test_$$ bs=8k count=256k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//'
-}
-io_test(){
-	io1=$( $1 )
-	echo "I/O speed(1st run)   : $io1" | tee -a $logfile
-	io2=$( $1 )
-	echo "I/O speed(2nd run)   : $io2" | tee -a $logfile
-	io3=$( $1 )
-	echo "I/O speed(3rd run)   : $io3" | tee -a $logfile
-	ioraw1=$( echo "$io1" | awk 'NR==1 {print $1}' )
-	[[ "$(echo "$io1" | awk 'NR==1 {print $2}')" == "GB/s" ]] && ioraw1=$( awk 'BEGIN{print '$ioraw1' * 1024}' )
-	ioraw2=$( echo "$io2" | awk 'NR==1 {print $1}' )
-	[[ "$(echo "$io2" | awk 'NR==1 {print $2}')" == "GB/s" ]] && ioraw2=$( awk 'BEGIN{print '$ioraw2' * 1024}' )
-	ioraw3=$( echo "$io3" | awk 'NR==1 {print $1}' )
-	[[ "$(echo "$io3" | awk 'NR==1 {print $2}')" == "GB/s" ]] && ioraw3=$( awk 'BEGIN{print '$ioraw3' * 1024}' )
-	unit="$(echo "$io1" | awk 'NR==1 {print $2}')"
-	if [[ "${unit}" == "GB/s" ]]; then
-		unit="MB/s"
-	else
-		if [[ "$(echo "$io1" | awk 'NR==1 {print $2}')" == "kB/s" ]]; then
-			unit="kB/s"
-			[[ "$(echo "$io2" | awk 'NR==1 {print $2}')" == "MB/s" ]] && ioraw2=$( awk 'BEGIN{print '$ioraw2' * 1024}' )
-			[[ "$(echo "$io3" | awk 'NR==1 {print $2}')" == "MB/s" ]] && ioraw3=$( awk 'BEGIN{print '$ioraw3' * 1024}' )
-		elif [[ "$(echo "$io2" | awk 'NR==1 {print $2}')" == "kB/s" ]]; then
-			unit="kB/s"
-			[[ "$(echo "$io1" | awk 'NR==1 {print $2}')" == "MB/s" ]] && ioraw1=$( awk 'BEGIN{print '$ioraw1' * 1024}' )
-			[[ "$(echo "$io3" | awk 'NR==1 {print $2}')" == "MB/s" ]] && ioraw3=$( awk 'BEGIN{print '$ioraw3' * 1024}' )
-		elif [[ "$(echo "$io3" | awk 'NR==1 {print $2}')" == "kB/s" ]]; then
-			unit="kB/s"
-			[[ "$(echo "$io1" | awk 'NR==1 {print $2}')" == "MB/s" ]] && ioraw1=$( awk 'BEGIN{print '$ioraw1' * 1024}' )
-			[[ "$(echo "$io2" | awk 'NR==1 {print $2}')" == "MB/s" ]] && ioraw2=$( awk 'BEGIN{print '$ioraw2' * 1024}' )
-		fi
-	fi
-	ioall=$( awk 'BEGIN{print '$ioraw1' + '$ioraw2' + '$ioraw3'}' )
-	ioavg=$( awk 'BEGIN{printf "%.1f", '$ioall' / 3}' )
-	echo "Average I/O speed    : $ioavg ${unit}" | tee -a $logfile
 }
 speed_test() {
 	local speedtest=$( curl  -m 12 -Lo /dev/null -skw "%{speed_download}\n" "$1" )
@@ -295,14 +254,6 @@ go(){
 	get_info
 	system_info
 	ioping
-	echo "===== 开始少量数据频繁写入测试 =====" | tee -a $logfile
-	io_test "io_test_1"
-	echo "===== 少量数据频繁写入测试完成 =====" | tee -a $logfile
-	next | tee -a $logfile
-	echo "===== 开始大数据连续写入测试 =====" | tee -a $logfile
-	io_test "io_test_2"
-	echo "===== 大数据连续写入测试完成 =====" | tee -a $logfile
-	next | tee -a $logfile
 	speed_test_cli
 	speed | tee -a $logfile
 	backtracetest
