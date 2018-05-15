@@ -249,9 +249,9 @@ benchtest(){
 	next | tee -a $logfile
 }
 sharetest() {
-	share_link=$( curl -X POST -s -d "$(cat /root/test.log)" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}' )
+	share_link=$( curl -v --data-urlencode "content@/root/test.log" -d "poster=linuxtest.log" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | grep "Location" | awk '{print $3}' )
 
-	echo "分享链接是""$share_link"
+	echo "分享链接是:    ""$share_link"
 }
 go(){
 	check_sys
