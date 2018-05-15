@@ -248,6 +248,11 @@ benchtest(){
 	rm -rf UnixBench5.1.3.tgz UnixBench
 	next | tee -a $logfile
 }
+sharetest() {
+	share_link=$( curl -X POST -s -d "$(cat /root/test.log)" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}' );;
+
+	echo "分享链接是""$share_link"
+}
 go(){
 	check_sys
 	Installation_dependency
@@ -259,7 +264,15 @@ go(){
 	backtracetest
 	mping | tee -a $logfile
 	
-	[[ ${action} == "a" ]] && benchtest
+	case $action in
+	'a' )
+		benchtest;;
+	's' )
+		sharetest;;
+	'as' )
+		benchtest
+		sharetest;;
+	esac
 	echo "测试脚本执行完毕！日志文件: ${logfile}"
 	echo "就是爱生活：www.94ish.me by Chikage"
 	rm -rf linuxtest.sh
