@@ -47,7 +47,7 @@ Installation_dependency(){
 	chmod -R +x besttrace
 }
 get_info(){
-	logfile="test.log"
+	logfile="/root/test.log"
 	IP=$(curl -s myip.ipip.net | awk -F ' ' '{print $2}' | awk -F '：' '{print $2}')
 	IPaddr=$(curl -s myip.ipip.net | awk -F '：' '{print $3}')
 	if [[ -z "$IP" ]]; then
@@ -93,7 +93,7 @@ system_info(){
 	echo "OS                   : $opsy" | tee -a $logfile
 	echo "Arch                 : $arch ($lbit Bit)" | tee -a $logfile
 	echo "Kernel               : $kern" | tee -a $logfile
-	echo "ip                   : $IP" | tee -a $logfilename
+	echo "ip                   : $IP"
 	echo "ipaddr               : $IPaddr" | tee -a $logfile
 	echo "vm                   : $vm" | tee -a $logfile
 	next | tee -a $logfile
@@ -212,7 +212,7 @@ shping(){
 	ping $1 -c 10 > /tmp/$1.txt
 	echo 【$2】 - $1
 	tail -2 /tmp/$1.txt
-	next | tee -a $logfile
+	next
 }
 mping(){
 	shping "125.64.38.178" "四川电信"
@@ -228,7 +228,7 @@ mping(){
 	echo "avg:平均延迟"
 	echo "max:最高延迟"
 	echo "mdev:平均偏差"
-	next | tee -a $logfile
+	next
 }
 
 benchtest(){
@@ -238,17 +238,17 @@ benchtest(){
 	tar -xzf UnixBench5.1.3.tgz
 	cd UnixBench/
 	make
-	echo "===== 开始UnixBench测试 =====" | tee -a ../${logfilename}
+	echo "===== 开始UnixBench测试 =====" | tee -a $logfile
 	./Run
 	benchfile=$(ls results/ | grep -v '\.')
-	cat results/${benchfile} >> ../${logfilename}
-	echo "===== UnixBench测试结束 =====" | tee -a ../${logfilename}	
+	cat results/${benchfile} >> $logfile
+	echo "===== UnixBench测试结束 =====" | tee -a $logfile
 	cd ..
 	rm -rf UnixBench5.1.3.tgz UnixBench
 	next | tee -a $logfile
 }
 sharetest() {
-	share_link=$( curl -v --data-urlencode "content@/root/test.log" -d "poster=linuxtest.log" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | grep "Location" | awk '{print $3}' )
+	share_link=$( curl -v --data-urlencode "content@$logfile" -d "poster=linuxtest.log" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | grep "Location" | awk '{print $3}' )
 
 	echo "分享链接是:    ""$share_link"
 }
