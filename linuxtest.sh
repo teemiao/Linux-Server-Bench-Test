@@ -34,13 +34,17 @@ Installation_dependency(){
 	if [[ ${release} == "centos" ]]; then
 		yum update
 		yum install curl time virt-what make -y
-		[[ ${action} == "a" ]] && yum install epel-release make gcc gcc-c++ gdbautomake autoconf hdparm -y
+		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
+			yum install epel-release make gcc gcc-c++ gdbautomake autoconf hdparm -y
+		fi
 		curl -s --max-time 10 -o ioping.static https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/ioping.static
 		chmod +x ioping.static
 	else
 		apt-get update && apt-get upgrade -y
 		apt-get install curl time virt-what python make -y
-		[[ ${action} == "a" ]] && apt-get install make gcc gdb automake autoconf hdparm -y
+		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
+			apt-get install make gcc gdb automake autoconf hdparm -y
+		fi
 		curl -s --max-time 10 -o ioping.static https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/ioping.static
 		chmod +x ioping.static
 	fi
