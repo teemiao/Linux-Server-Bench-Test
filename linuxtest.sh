@@ -46,8 +46,6 @@ Installation_dependency(){
 		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
 			apt-get install make gcc gdb automake autoconf hdparm -y
 		fi
-		curl -s --max-time 10 -o ioping.static https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/ioping.static
-		chmod +x ioping.static
 	fi
 	wget --no-check-certificate -N "https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/besttrace"
 	chmod -R +x besttrace
@@ -107,9 +105,9 @@ system_info(){
 ioping() {
 		echo "===== 开始硬盘性能测试 =====" | tee -a $logfile
         printf 'ioping: seek rate\n    ' | tee -a $logfile
-        ioping -R -w 5 . | tail -n 1 | tee -a $logfile
+        /usr/bin/ioping -R -w 5 . | tail -n 1 | tee -a $logfile
         printf 'ioping: sequential speed\n    ' | tee -a $logfile
-        ioping -RL -w 5 . | tail -n 2 | head -n 1 | tee -a $logfile
+        /usr/bin/ioping -RL -w 5 . | tail -n 2 | head -n 1 | tee -a $logfile
 		echo "===== 硬盘性能测试完成 =====" | tee -a $logfile
 	next | tee -a $logfile
 }
