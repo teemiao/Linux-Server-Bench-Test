@@ -32,16 +32,15 @@ check_sys(){
 }
 Installation_dependency(){
 	if [[ ${release} == "centos" ]]; then
-		yum update
-		yum install curl time virt-what make -y
+		yum install curl time virt-what make ioping -y
 		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
 			yum install epel-release make gcc gcc-c++ gdbautomake autoconf hdparm -y
 		fi
 		curl -s --max-time 10 -o ioping.static https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/ioping.static
 		chmod +x ioping.static
 	else
-		apt-get update && apt-get upgrade -y
-		apt-get install curl time virt-what python make -y
+		apt-get update
+		apt-get install curl time virt-what python make ioping -y
 		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
 			apt-get install make gcc gdb automake autoconf hdparm -y
 		fi
@@ -106,12 +105,11 @@ system_info(){
 ioping() {
 		echo "===== 开始硬盘性能测试 =====" | tee -a $logfile
         printf 'ioping: seek rate\n    ' | tee -a $logfile
-        ./ioping.static -R -w 5 . | tail -n 1 | tee -a $logfile
+        ioping -R -w 5 . | tail -n 1 | tee -a $logfile
         printf 'ioping: sequential speed\n    ' | tee -a $logfile
-        ./ioping.static -RL -w 5 . | tail -n 2 | head -n 1 | tee -a $logfile
+        ioping -RL -w 5 . | tail -n 2 | head -n 1 | tee -a $logfile
 		echo "===== 硬盘性能测试完成 =====" | tee -a $logfile
 	next | tee -a $logfile
-	rm -rf ioping.static
 }
 calc_disk() {
 	local total_size=0
