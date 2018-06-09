@@ -33,12 +33,11 @@ check_sys(){
 Installation_dependency(){
 	if [[ ${release} == "centos" ]]; then
 		yum install curl time virt-what make -y
-		yum install ioping -y
 		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
 			yum install make automake gcc autoconf gcc-c++ time perl-Time-HiRes -y
 		fi
-		curl -s --max-time 10 -o ioping.static https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/ioping.static
-		chmod +x ioping.static
+		wget --no-check-certificate -N -O /usr/bin/ioping "https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/ioping" 
+		chmod +x /usr/bin/ioping
 	else
 		apt-get update
 		apt-get install curl time virt-what python make -y
