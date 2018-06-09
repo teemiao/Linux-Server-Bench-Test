@@ -32,7 +32,8 @@ check_sys(){
 }
 Installation_dependency(){
 	if [[ ${release} == "centos" ]]; then
-		yum install curl time virt-what make ioping -y
+		yum install curl time virt-what make -y
+		yum install ioping -y
 		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
 			yum install epel-release make gcc gcc-c++ gdbautomake autoconf hdparm -y
 		fi
@@ -40,7 +41,8 @@ Installation_dependency(){
 		chmod +x ioping.static
 	else
 		apt-get update
-		apt-get install curl time virt-what python make ioping -y
+		apt-get install curl time virt-what python make -y
+		apt-get install ioping -y
 		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
 			apt-get install make gcc gdb automake autoconf hdparm -y
 		fi
