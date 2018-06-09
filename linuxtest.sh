@@ -35,7 +35,7 @@ Installation_dependency(){
 		yum install curl time virt-what make -y
 		yum install ioping -y
 		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
-			yum install epel-release make gcc gcc-c++ gdbautomake autoconf hdparm -y
+			yum install make automake gcc autoconf gcc-c++ time perl-Time-HiRes -y
 		fi
 		curl -s --max-time 10 -o ioping.static https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/ioping.static
 		chmod +x ioping.static
@@ -44,7 +44,7 @@ Installation_dependency(){
 		apt-get install curl time virt-what python make -y
 		apt-get install ioping -y
 		if [[ ${action} == "a" ]] || [[ ${action} == "as" ]]; then
-			apt-get install make gcc gdb automake autoconf hdparm -y
+			apt-get install make automake gcc autoconf time perl -y
 		fi
 	fi
 	wget --no-check-certificate -N "https://raw.githubusercontent.com/chiakge/Linux-Server-Bench-Test/master/besttrace"
