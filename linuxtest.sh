@@ -179,12 +179,9 @@ speedchina(){
 	speed_test 'http://speedtest1.ah163.com:8080/download?size=100000000' '安徽合肥电信'
 	speed_test 'http://4gnanjing1.speedtest.jsinfo.net:8080/download?size=100000000' '江苏南京电信'
 	speed_test 'http://speed.westidc.com.cn:8080/download?size=100000000' '四川成都电信'
-	speed_test 'http://speed.cqtelecom.com.cn:8080/download?size=100000000' '重庆电信'
 	speed_test 'http://swxwyzx.f3322.net:8080/download?size=100000000' '江西南昌电信'
 	speed_test 'http://61.128.107.242:8080/download?size=100000000' '新疆昌吉电信'
-	speed_test 'http://58.51.94.106:8080/download?size=100000000' '湖北襄阳电信'
 	speed_test 'http://112.122.10.26:8080/download?size=100000000' '安徽合肥联通'
-	speed_test 'http://speedtest.cqwin.com:8080/download?size=100000000' '重庆联通'
 	speed_test 'http://speedtest.jnltwy.com:8080/download?size=100000000' '山东济南联通'
 	speed_test 'http://speedtest1.jlinfo.jl.cn:8080/download?size=100000000' '吉林长春联通'
 	speed_test 'http://113.57.249.2:8080/download?size=100000000' '湖北武汉联通'
@@ -194,9 +191,8 @@ speedchina(){
 	speed_test 'http://speedtest02.js165.com:8080/download?size=100000000' '江苏南京联通'
 	speed_test 'http://4gtest.ahydnet.com:8080/download?size=100000000' '安徽合肥移动'
 	speed_test 'http://sp.sx.chinamobile.com:8080/download?size=100000000' '山西太原移动'
-	speed_test 'http://speedtest2.cq.chinamobile.com:8080/download?size=100000000' '重庆移动'
 	speed_test 'http://183.221.247.9:8080/download?size=100000000' '四川成都移动'
-	speed_test 'http://speedtest5.xj.chinamobile.com:8080/download?size=100000000' '新疆阿勒泰移动'
+	speed_test 'http://speedtest5.xj.chinamobile.com:8080/download?size=100000000' '新疆昌吉移动'
 	speed_test 'http://speedtest2.jl.chinamobile.com:8080/download?size=100000000' '吉林长春移动'
 	speed_test 'http://speedtest1.xz.chinamobile.com:8080/download?size=100000000' '西藏拉萨移动'
 	speed_test 'http://speedtest1.ln.chinamobile.com:8080/download?size=100000000' '辽宁沈阳移动'
@@ -222,13 +218,9 @@ mtrback(){
 backtracetest(){
 	mtrback "speedtest1.ah163.com" "安徽合肥电信"
 	mtrback "4gnanjing1.speedtest.jsinfo.net" "江苏南京电信"
-	mtrback "speed.westidc.com.cn" "四川成都电信"
-	mtrback "speed.cqtelecom.com.cn" "重庆电信"
 	mtrback "swxwyzx.f3322.net" "江西南昌电信"
 	mtrback "61.128.107.242" "新疆昌吉电信"
-	mtrback "58.51.94.106" "湖北襄阳电信"
 	mtrback "112.122.10.26" "安徽合肥联通"
-	mtrback "speedtest.cqwin.com" "重庆联通"
 	mtrback "speedtest.jnltwy.com" "山东济南联通"
 	mtrback "speedtest1.jlinfo.jl.cn" "吉林长春联通"
 	mtrback "113.57.249.2" "湖北武汉联通"
@@ -238,9 +230,8 @@ backtracetest(){
 	mtrback "speedtest02.js165.com" "江苏南京联通"
 	mtrback "4gtest.ahydnet.com" "安徽合肥移动"
 	mtrback "sp.sx.chinamobile.com" "山西太原移动"
-	mtrback "speedtest2.cq.chinamobile.com" "重庆移动"
 	mtrback "183.221.247.9" "四川成都移动"
-	mtrback "speedtest5.xj.chinamobile.com" "新疆阿勒泰移动"
+	mtrback "speedtest5.xj.chinamobile.com" "新疆昌吉移动"
 	mtrback "speedtest2.jl.chinamobile.com" "吉林长春移动"
 	mtrback "speedtest1.xz.chinamobile.com" "西藏拉萨移动"
 	mtrback "speedtest1.ln.chinamobile.com" "辽宁沈阳移动"
@@ -259,12 +250,9 @@ mping(){
 	shping "speedtest1.ah163.com" "安徽合肥电信"
 	shping "4gnanjing1.speedtest.jsinfo.net" "江苏南京电信"
 	shping "speed.westidc.com.cn" "四川成都电信"
-	shping "speed.cqtelecom.com.cn" "重庆电信"
 	shping "swxwyzx.f3322.net" "江西南昌电信"
 	shping "61.128.107.242" "新疆昌吉电信"
-	shping "58.51.94.106" "湖北襄阳电信"
 	shping "112.122.10.26" "安徽合肥联通"
-	shping "speedtest.cqwin.com" "重庆联通"
 	shping "speedtest.jnltwy.com" "山东济南联通"
 	shping "speedtest1.jlinfo.jl.cn" "吉林长春联通"
 	shping "113.57.249.2" "湖北武汉联通"
@@ -274,9 +262,8 @@ mping(){
 	shping "speedtest02.js165.com" "江苏南京联通"
 	shping "4gtest.ahydnet.com" "安徽合肥移动"
 	shping "sp.sx.chinamobile.com" "山西太原移动"
-	shping "speedtest2.cq.chinamobile.com" "重庆移动"
 	shping "183.221.247.9" "四川成都移动"
-	shping "speedtest5.xj.chinamobile.com" "新疆阿勒泰移动"
+	shping "speedtest5.xj.chinamobile.com" "新疆昌吉移动"
 	shping "speedtest2.jl.chinamobile.com" "吉林长春移动"
 	shping "speedtest1.xz.chinamobile.com" "西藏拉萨移动"
 	shping "speedtest1.ln.chinamobile.com" "辽宁沈阳移动"
