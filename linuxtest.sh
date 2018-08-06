@@ -150,7 +150,7 @@ FormatBytes() {
 speed() {
 	printf "%-32s%-31s%-14s\n" "Node Name:" "IPv4 address:" "Download Speed"
 	speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
-    speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, Tokyo, JP'
+    	speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, Tokyo, JP'
 	speed_test 'http://speedtest.tokyo2.linode.com/100MB-tokyo2.bin' 'Linode, Tokyo2, JP'
 	speed_test 'http://speedtest.singapore.linode.com/100MB-singapore.bin' 'Linode, Singapore, SG'
 	speed_test 'http://speedtest.fremont.linode.com/100MB-fremont.bin' 'Linode, Fremont, CA'
@@ -171,15 +171,37 @@ speed() {
 	speed_test 'http://mirror.sfo12.us.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, San Francisco, US'
 	speed_test 'http://mirror.nl.leaseweb.net/speedtest/100mb.bin' 'Leaseweb, Netherlands, NL'
 	speed_test 'http://proof.ovh.ca/files/100Mio.dat' 'OVH, Montreal, CA'
-	speed_test 'http://speedtest1.online.sh.cn:8080/download?size=100000000' 'ChinaTelecom, Shanghai, CN'
-	speed_test 'http://st1.bjtelecom.net:8080/download?size=100000000' 'ChinaTelecom, Beijing, CN'
-	speed_test 'http://www2.unicomtest.com:8080/download?size=100000000' 'ChinaUnicom, Beijing, CN'
-	speed_test 'http://gzspeedtest.com:8080/download?size=100000000' 'ChinaTelecom, Guangzhou, CN'
-	speed_test 'http://speedtest1.gd.chinamobile.com:8080/download?size=100000000' 'ChinaMobile, Guangzhou, CN'
-	speed_test 'http://speedtest1.ah163.com:8080/download?size=100000000' 'ChinaTelecom, Hefei, CN'
-	speed_test 'http://112.122.10.26:8080/download?size=100000000' 'ChinaUnicom, Hefei, CN'
-	speed_test 'http://4gtest.ahydnet.com:8080/download?size=100000000' 'ChinaMobile, Hefei, CN'
 	speed_test 'http://tpdb.speed2.hinet.net/test_100m.zip' 'Hinet, Taiwan, TW'
+	next
+}
+speedchina(){
+	printf "%-32s%-31s%-14s\n" "节点名称:" "IP地址:" "下载速度"
+	speed_test 'http://speedtest1.ah163.com:8080/download?size=100000000' '安徽合肥电信'
+	speed_test 'http://4gnanjing1.speedtest.jsinfo.net:8080/download?size=100000000' '江苏南京电信'
+	speed_test 'http://speed.westidc.com.cn:8080/download?size=100000000' '四川成都电信'
+	speed_test 'http://speed.cqtelecom.com.cn:8080/download?size=100000000' '重庆电信'
+	speed_test 'http://swxwyzx.f3322.net:8080/download?size=100000000' '江西南昌电信'
+	speed_test 'http://61.128.107.242:8080/download?size=100000000' '新疆昌吉电信'
+	speed_test 'http://58.51.94.106:8080/download?size=100000000' '湖北襄阳电信'
+	speed_test 'http://112.122.10.26:8080/download?size=100000000' '安徽合肥联通'
+	speed_test 'http://speedtest.cqwin.com:8080/download?size=100000000' '重庆联通'
+	speed_test 'http://speedtest.jnltwy.com:8080/download?size=100000000' '山东济南联通'
+	speed_test 'http://speedtest1.jlinfo.jl.cn:8080/download?size=100000000' '吉林长春联通'
+	speed_test 'http://113.57.249.2:8080/download?size=100000000' '湖北武汉联通'
+	speed_test 'http://221.13.70.244:8080/download?size=100000000' '西藏拉萨联通'
+	speed_test 'http://speedtest1.online.ln.cn:8080/download?size=100000000' '辽宁沈阳联通'
+	speed_test 'http://speedtest.sxunicomjzjk.cn:8080/download?size=100000000' '山西太原联通'
+	speed_test 'http://speedtest02.js165.com:8080/download?size=100000000' '江苏南京联通'
+	speed_test 'http://4gtest.ahydnet.com:8080/download?size=100000000' '安徽合肥移动'
+	speed_test 'http://sp.sx.chinamobile.com:8080/download?size=100000000' '山西太原移动'
+	speed_test 'http://speedtest2.cq.chinamobile.com:8080/download?size=100000000' '重庆移动'
+	speed_test 'http://183.221.247.9:8080/download?size=100000000' '四川成都移动'
+	speed_test 'http://speedtest5.xj.chinamobile.com:8080/download?size=100000000' '新疆阿勒泰移动'
+	speed_test 'http://speedtest2.jl.chinamobile.com:8080/download?size=100000000' '吉林长春移动'
+	speed_test 'http://speedtest1.xz.chinamobile.com:8080/download?size=100000000' '西藏拉萨移动'
+	speed_test 'http://speedtest1.ln.chinamobile.com:8080/download?size=100000000' '辽宁沈阳移动'
+	speed_test 'http://speedtest1.hb.chinamobile.com:8080/download?size=100000000' '湖北武汉移动'
+	speed_test 'http://sp1.uestc.edu.cn:8080/download?size=100000000' '四川成都教育网'
 	next
 }
 speed_test_cli(){
@@ -198,15 +220,32 @@ mtrback(){
 }
 
 backtracetest(){
-	mtrback "125.64.38.178" "四川电信"
-	mtrback "106.120.243.142" "北京电信"
-	mtrback "103.254.70.52" "北京联通"
-	mtrback "218.205.152.14" "北京移动"
-	mtrback "117.131.14.202" "上海移动"
-	mtrback "211.144.205.58" "上海电信"
-	mtrback "220.196.42.133" "上海联通"
-	mtrback "27.40.0.30" "广东联通"
-	mtrback "211.139.129.222" "广东移动"
+	mtrback "speedtest1.ah163.com" "安徽合肥电信"
+	mtrback "4gnanjing1.speedtest.jsinfo.net" "江苏南京电信"
+	mtrback "speed.westidc.com.cn" "四川成都电信"
+	mtrback "speed.cqtelecom.com.cn" "重庆电信"
+	mtrback "swxwyzx.f3322.net" "江西南昌电信"
+	mtrback "61.128.107.242" "新疆昌吉电信"
+	mtrback "58.51.94.106" "湖北襄阳电信"
+	mtrback "112.122.10.26" "安徽合肥联通"
+	mtrback "speedtest.cqwin.com" "重庆联通"
+	mtrback "speedtest.jnltwy.com" "山东济南联通"
+	mtrback "speedtest1.jlinfo.jl.cn" "吉林长春联通"
+	mtrback "113.57.249.2" "湖北武汉联通"
+	mtrback "221.13.70.244" "西藏拉萨联通"
+	mtrback "speedtest1.online.ln.cn" "辽宁沈阳联通"
+	mtrback "speedtest.sxunicomjzjk.cn" "山西太原联通"
+	mtrback "speedtest02.js165.com" "江苏南京联通"
+	mtrback "4gtest.ahydnet.com" "安徽合肥移动"
+	mtrback "sp.sx.chinamobile.com" "山西太原移动"
+	mtrback "speedtest2.cq.chinamobile.com" "重庆移动"
+	mtrback "183.221.247.9" "四川成都移动"
+	mtrback "speedtest5.xj.chinamobile.com" "新疆阿勒泰移动"
+	mtrback "speedtest2.jl.chinamobile.com" "吉林长春移动"
+	mtrback "speedtest1.xz.chinamobile.com" "西藏拉萨移动"
+	mtrback "speedtest1.ln.chinamobile.com" "辽宁沈阳移动"
+	mtrback "speedtest1.hb.chinamobile.com" "湖北武汉移动"
+	mtrback "sp1.uestc.edu.cn" "四川成都教育网"
 	rm -rf besttrace
 	next | tee -a $logfile
 }
@@ -217,15 +256,32 @@ shping(){
 	next
 }
 mping(){
-	shping "125.64.38.178" "四川电信"
-	shping "106.120.243.142" "北京电信"
-	shping "103.254.70.52" "北京联通"
-	shping "218.205.152.14" "北京移动"
-	shping "117.131.14.202" "上海移动"
-	shping "211.144.205.58" "上海电信"
-	shping "220.196.42.133" "上海联通"
-	shping "27.40.0.30" "广东联通"
-	shping "211.139.129.222" "广东移动"
+	shping "speedtest1.ah163.com" "安徽合肥电信"
+	shping "4gnanjing1.speedtest.jsinfo.net" "江苏南京电信"
+	shping "speed.westidc.com.cn" "四川成都电信"
+	shping "speed.cqtelecom.com.cn" "重庆电信"
+	shping "swxwyzx.f3322.net" "江西南昌电信"
+	shping "61.128.107.242" "新疆昌吉电信"
+	shping "58.51.94.106" "湖北襄阳电信"
+	shping "112.122.10.26" "安徽合肥联通"
+	shping "speedtest.cqwin.com" "重庆联通"
+	shping "speedtest.jnltwy.com" "山东济南联通"
+	shping "speedtest1.jlinfo.jl.cn" "吉林长春联通"
+	shping "113.57.249.2" "湖北武汉联通"
+	shping "221.13.70.244" "西藏拉萨联通"
+	shping "speedtest1.online.ln.cn" "辽宁沈阳联通"
+	shping "speedtest.sxunicomjzjk.cn" "山西太原联通"
+	shping "speedtest02.js165.com" "江苏南京联通"
+	shping "4gtest.ahydnet.com" "安徽合肥移动"
+	shping "sp.sx.chinamobile.com" "山西太原移动"
+	shping "speedtest2.cq.chinamobile.com" "重庆移动"
+	shping "183.221.247.9" "四川成都移动"
+	shping "speedtest5.xj.chinamobile.com" "新疆阿勒泰移动"
+	shping "speedtest2.jl.chinamobile.com" "吉林长春移动"
+	shping "speedtest1.xz.chinamobile.com" "西藏拉萨移动"
+	shping "speedtest1.ln.chinamobile.com" "辽宁沈阳移动"
+	shping "speedtest1.hb.chinamobile.com" "湖北武汉移动"
+	shping "sp1.uestc.edu.cn" "四川成都教育网"
 	echo "min:最低延迟"
 	echo "avg:平均延迟"
 	echo "max:最高延迟"
@@ -262,6 +318,7 @@ go(){
 	ioping
 	speed_test_cli
 	speed | tee -a $logfile
+	speedchina | tee -a $logfile
 	backtracetest
 	mping | tee -a $logfile
 	
