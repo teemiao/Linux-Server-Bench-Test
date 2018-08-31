@@ -178,7 +178,6 @@ speedchina(){
 	printf "%-32s%-31s%-14s\n" "节点名称:" "IP地址:" "下载速度"
 	speed_test 'http://speedtest1.ah163.com:8080/download?size=100000000' '安徽合肥电信'
 	speed_test 'http://4gnanjing1.speedtest.jsinfo.net:8080/download?size=100000000' '江苏南京电信'
-	speed_test 'http://speed.westidc.com.cn:8080/download?size=100000000' '四川成都电信'
 	speed_test 'http://swxwyzx.f3322.net:8080/download?size=100000000' '江西南昌电信'
 	speed_test 'http://61.128.107.242:8080/download?size=100000000' '新疆昌吉电信'
 	speed_test 'http://112.122.10.26:8080/download?size=100000000' '安徽合肥联通'
@@ -248,7 +247,6 @@ shping(){
 mping(){
 	shping "speedtest1.ah163.com" "安徽合肥电信"
 	shping "4gnanjing1.speedtest.jsinfo.net" "江苏南京电信"
-	shping "speed.westidc.com.cn" "四川成都电信"
 	shping "swxwyzx.f3322.net" "江西南昌电信"
 	shping "61.128.107.242" "新疆昌吉电信"
 	shping "112.122.10.26" "安徽合肥联通"
