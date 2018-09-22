@@ -192,6 +192,9 @@ speedchina(){
 	speed_test 'http://4gtest.ahydnet.com:8080/download?size=100000000' '安徽合肥移动'
 	speed_test 'http://sp.sx.chinamobile.com:8080/download?size=100000000' '山西太原移动'
 	speed_test 'http://183.221.247.9:8080/download?size=100000000' '四川成都移动'
+	speed_test 'http://221.179.46.218:8080/download?size=100000000' '广东广州移动'
+	speed_test 'http://120.204.198.209:8080/download?size=100000000' '上海上海移动'
+	speed_test 'http://221.179.174.73:8080/download?size=100000000' '北京北京移动'
 	speed_test 'http://speedtest5.xj.chinamobile.com:8080/download?size=100000000' '新疆昌吉移动'
 	speed_test 'http://speedtest2.jl.chinamobile.com:8080/download?size=100000000' '吉林长春移动'
 	speed_test 'http://speedtest1.xz.chinamobile.com:8080/download?size=100000000' '西藏拉萨移动'
@@ -200,6 +203,7 @@ speedchina(){
 	speed_test 'http://speedtest1.sd.chinamobile.com:8080/download?size=100000000' '山东济南移动'
 	speed_test 'http://speedtest2.sd.chinamobile.com:8080/download?size=100000000' '山东青岛移动'
 	speed_test 'http://speedtest3.sd.chinamobile.com:8080/download?size=100000000' '山东临沂移动'
+	speed_test 'http://120.108.127.33:8080/download?size=100000000' 'Asia University,Taiwan'
 	speed_test 'http://sp1.uestc.edu.cn:8080/download?size=100000000' '四川成都教育网'
 	next
 }
@@ -234,6 +238,10 @@ backtracetest(){
 	mtrback "4gtest.ahydnet.com" "安徽合肥移动"
 	mtrback "sp.sx.chinamobile.com" "山西太原移动"
 	mtrback "183.221.247.9" "四川成都移动"
+	mtrback "221.179.46.218" "广东广州移动"
+	mtrback "120.204.198.209" "上海上海移动"
+	mtrback "221.179.174.73" "北京北京移动"
+	mtrback "120.108.127.33" "Asia University,Taiwan"
 	mtrback "speedtest5.xj.chinamobile.com" "新疆昌吉移动"
 	mtrback "speedtest2.jl.chinamobile.com" "吉林长春移动"
 	mtrback "speedtest1.xz.chinamobile.com" "西藏拉萨移动"
@@ -268,6 +276,10 @@ mping(){
 	shping "4gtest.ahydnet.com" "安徽合肥移动"
 	shping "sp.sx.chinamobile.com" "山西太原移动"
 	shping "183.221.247.9" "四川成都移动"
+	shping "221.179.46.218" "广东广州移动"
+	shping "120.204.198.209" "上海上海移动"
+	shping "221.179.174.73" "北京北京移动"
+	shping "120.108.127.33" "Asia University,Taiwan"
 	shping "speedtest5.xj.chinamobile.com" "新疆昌吉移动"
 	shping "speedtest2.jl.chinamobile.com" "吉林长春移动"
 	shping "speedtest1.xz.chinamobile.com" "西藏拉萨移动"
