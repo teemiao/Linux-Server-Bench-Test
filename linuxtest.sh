@@ -206,6 +206,7 @@ speedchina(){
 	speed_test 'http://120.108.127.33:8080/download?size=100000000' 'Asia University,Taiwan'
 	speed_test 'http://sp1.uestc.edu.cn:8080/download?size=100000000' '四川成都教育网'
 	speed_test 'http://99.24.18.13:8080/download?size=100000000' 'att.com旧金山'
+	speed_test 'http://129.250.2.67:8080/download?size=100000000' 'NTT.COM 骨干网'
 	next
 }
 speed_test_cli(){
@@ -253,6 +254,7 @@ backtracetest(){
 	mtrback "speedtest3.sd.chinamobile.com" "山东临沂移动"
 	mtrback "sp1.uestc.edu.cn" "四川成都教育网"
 	mtrback "99.24.18.13" "att.com旧金山"
+	mtrback "129.250.2.67" "NTT.COM 骨干网"
 	rm -rf besttrace
 	next | tee -a $logfile
 }
@@ -292,6 +294,7 @@ mping(){
 	shping "speedtest3.sd.chinamobile.com" "山东临沂移动"
 	shping "sp1.uestc.edu.cn" "四川成都教育网"
 	shping "99.24.18.13" "att.com旧金山"
+	shping "129.250.2.67" "NTT.COM 骨干网"
 	echo "min:最低延迟"
 	echo "avg:平均延迟"
 	echo "max:最高延迟"
