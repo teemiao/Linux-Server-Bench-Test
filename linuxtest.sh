@@ -197,6 +197,7 @@ speedchina(){
 	speed_test 'http://speedtest1.ln.chinamobile.com:8080/download?size=100000000' '辽宁沈阳移动'
 	speed_test 'http://speedtest1.hb.chinamobile.com:8080/download?size=100000000' '湖北武汉移动'
 	speed_test 'http://speedtest1.sd.chinamobile.com:8080/download?size=100000000' '山东济南移动'
+	speed_test 'http://speedtest3.sd.chinamobile.com:8080/download?size=100000000' '山东临沂移动'
 	speed_test 'http://sp1.uestc.edu.cn:8080/download?size=100000000' '四川成都教育网'
 	next
 }
@@ -236,6 +237,7 @@ backtracetest(){
 	mtrback "speedtest1.ln.chinamobile.com" "辽宁沈阳移动"
 	mtrback "speedtest1.hb.chinamobile.com" "湖北武汉移动"
 	mtrback "speedtest1.sd.chinamobile.com" "山东济南移动"
+	mtrback "speedtest3.sd.chinamobile.com" "山东临沂移动"
 	mtrback "sp1.uestc.edu.cn" "四川成都教育网"
 	rm -rf besttrace
 	next | tee -a $logfile
@@ -267,6 +269,7 @@ mping(){
 	shping "speedtest1.ln.chinamobile.com" "辽宁沈阳移动"
 	shping "speedtest1.hb.chinamobile.com" "湖北武汉移动"
 	shping "speedtest1.sd.chinamobile.com" "山东济南移动"
+	shping "speedtest3.sd.chinamobile.com" "山东临沂移动"
 	shping "sp1.uestc.edu.cn" "四川成都教育网"
 	echo "min:最低延迟"
 	echo "avg:平均延迟"
