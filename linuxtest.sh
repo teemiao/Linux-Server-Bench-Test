@@ -182,7 +182,7 @@ speedchina(){
 	speed_test 'http://61.128.107.242:8080/download?size=100000000' '新疆昌吉电信'
 	speed_test 'http://112.122.10.26:8080/download?size=100000000' '安徽合肥联通'
 	speed_test 'http://speedtest.jnltwy.com:8080/download?size=100000000' '山东济南联通'
-	speed_test 'http://112.224.63.18:8080/download?size=100000000' '山东联通'
+	speed_test 'http://112.224.63.18:8080/download?size=100000000' '山东济南联通'
 	speed_test 'http://speedtest1.jlinfo.jl.cn:8080/download?size=100000000' '吉林长春联通'
 	speed_test 'http://113.57.249.2:8080/download?size=100000000' '湖北武汉联通'
 	speed_test 'http://221.13.70.244:8080/download?size=100000000' '西藏拉萨联通'
@@ -225,7 +225,7 @@ backtracetest(){
 	mtrback "61.128.107.242" "新疆昌吉电信"
 	mtrback "112.122.10.26" "安徽合肥联通"
 	mtrback "speedtest.jnltwy.com" "山东济南联通"
-	mtrback "112.224.63.18" "山东联通"
+	mtrback "112.224.63.18" "山东济南联通"
 	mtrback "113.57.249.2" "湖北武汉联通"
 	mtrback "221.13.70.244" "西藏拉萨联通"
 	mtrback "speedtest1.online.ln.cn" "辽宁沈阳联通"
@@ -259,7 +259,7 @@ mping(){
 	shping "61.128.107.242" "新疆昌吉电信"
 	shping "112.122.10.26" "安徽合肥联通"
 	shping "speedtest.jnltwy.com" "山东济南联通"
-	shping "112.224.63.18" "山东联通"
+	shping "112.224.63.18" "山东济南联通"
 	shping "113.57.249.2" "湖北武汉联通"
 	shping "221.13.70.244" "西藏拉萨联通"
 	shping "speedtest1.online.ln.cn" "辽宁沈阳联通"
