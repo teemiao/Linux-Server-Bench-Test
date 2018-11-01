@@ -203,7 +203,7 @@ speedchina(){
 	speed_test 'http://speedtest1.sd.chinamobile.com:8080/download?size=100000000' '山东济南移动'
 	speed_test 'http://speedtest2.sd.chinamobile.com:8080/download?size=100000000' '山东青岛移动'
 	speed_test 'http://speedtest3.sd.chinamobile.com:8080/download?size=100000000' '山东临沂移动'
-	speed_test 'http://223.99.135.161:8080/download?size=100000000' '山东临沂移动'
+	speed_test 'http://23.252.96.201:8080/download?size=100000000' '山东临沂移动'
 	speed_test 'http://120.108.127.33:8080/download?size=100000000' 'Asia University,Taiwan'
 	speed_test 'http://sp1.uestc.edu.cn:8080/download?size=100000000' '四川成都教育网'
 	speed_test 'http://99.24.18.13:8080/download?size=100000000' 'att.com旧金山'
@@ -253,7 +253,7 @@ backtracetest(){
 	mtrback "speedtest1.sd.chinamobile.com" "山东济南移动"
 	mtrback "speedtest2.sd.chinamobile.com" "山东青岛移动"
 	mtrback "speedtest3.sd.chinamobile.com" "山东临沂移动"
-	mtrback "223.99.135.161" "山东临沂移动"
+	mtrback "23.252.96.201" "山东临沂移动"
 	mtrback "sp1.uestc.edu.cn" "四川成都教育网"
 	mtrback "99.24.18.13" "att.com旧金山"
 	mtrback "129.250.2.67" "NTT.COM 骨干网"
@@ -294,7 +294,7 @@ mping(){
 	shping "speedtest1.sd.chinamobile.com" "山东济南移动"
 	shping "speedtest2.sd.chinamobile.com" "山东青岛移动"
 	shping "speedtest3.sd.chinamobile.com" "山东临沂移动"
-	shping "223.99.135.161" "山东临沂移动"
+	shping "23.252.96.201" "山东临沂移动"
 	shping "sp1.uestc.edu.cn" "四川成都教育网"
 	shping "99.24.18.13" "att.com旧金山"
 	shping "129.250.2.67" "NTT.COM 骨干网"
